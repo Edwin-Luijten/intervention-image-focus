@@ -5,7 +5,7 @@ Cropping images based on a focal point.
 ![Example](example.png)
 
 ## Requirements
-- PHP ^8.1
+- PHP ^7.4 or ^8.1
 - [Intervention Image](http://image.intervention.io/)
 
 ## Installation
