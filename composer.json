@@ -1,0 +1,27 @@
+{
+  "name": "edwin-luijten/intervention-image-focus",
+  "description": "Intervention Image filter to crop images with a focal point",
+  "type": "library",
+  "keywords": [
+    "intervention",
+    "image",
+    "crop",
+    "focal",
+    "point",
+    "focal point"
+  ],
+  "authors": [
+    {
+      "name": "Edwin Luijten"
+    }
+  ],
+  "require": {
+    "php": "^7.4 | ^8.1",
+    "intervention/image": "^2.7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "EdwinLuijten\\InterventionImageFocus\\": "src/"
+    }
+  }
+}
