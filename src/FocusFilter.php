@@ -38,8 +38,7 @@ class FocusFilter implements FilterInterface
 
         $crop = $this->getCrop();
 
-        $focalX = $crop[0];
-        $focalY = $crop[1];
+        [$focalX, $focalY] = $crop;
 
         $focalPointX = round($imageWidth * ($focalX / 100));
         $focalPointY = round($imageHeight * ($focalY / 100));
