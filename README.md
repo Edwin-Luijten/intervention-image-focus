@@ -1,6 +1,6 @@
 # Intervention Image Focus Filter
 
-![Packagist Downloads](https://img.shields.io/packagist/dm/edwin-luijten/intervention-image-focus?style=flat-square)
+![Packagist Downloads](https://img.shields.io/packagist/dt/edwin-luijten/intervention-image-focus?style=flat-square)
 ![CircleCI](https://img.shields.io/circleci/build/github/Edwin-Luijten/intervention-image-focus/main?style=flat-square)
 ![Example](example.png)
 Cropping images based on a focal point.
