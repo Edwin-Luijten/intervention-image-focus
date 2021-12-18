@@ -1,10 +1,11 @@
 # Intervention Image Focus Filter
 
----
-
-Cropping images based on a focal point.
+![Packagist Downloads](https://img.shields.io/packagist/dm/edwin-luijten/intervention-image-focus?style=flat-square)
+![Travis (.com) branch](https://img.shields.io/travis/com/edwin-luijten/intervention-image-focus/main?style=flat-square)
 
 ![Example](example.png)
+Cropping images based on a focal point.
+
 
 ## Requirements
 - PHP ^7.4 or ^8.1
