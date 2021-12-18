@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/7.4-cli-buster
+      - image: circleci/php:7.4-cli-buster
     steps:
       - checkout
       - run: sudo apt update
