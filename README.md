@@ -36,3 +36,15 @@ $image->filter(new FocusFilter(500, 500, '50-50')));
 $image->encode('png');
 $image->save('test.png');
 ```
+
+1284x602
+642x602
+428x602
+
+1284x301
+642x301
+428x301
+
+1284x200
+642x200
+428x200

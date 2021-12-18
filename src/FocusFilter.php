@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace EdwinLuijten\InterventionImageFocus;
 
 use Intervention\Image\Filters\FilterInterface;
@@ -96,7 +98,7 @@ class FocusFilter implements FilterInterface
         return [50, 50];
     }
 
-    private function getShift(int $ratio, int $containerSize, int $imageSize, int $focusPosition, bool $toMinus = false): int
+    private function getShift(float $ratio, float $containerSize, float $imageSize, $focusPosition, bool $toMinus = false): float
     {
         $containerCenter = floor($containerSize / 2);
         $focusFactor = $focusPosition / $imageSize;
