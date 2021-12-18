@@ -1,5 +1,7 @@
 # Intervention Image Focus Filter
 
+---
+
 Cropping images based on a focal point.
 
 ![Example](example.png)
@@ -35,3 +37,9 @@ $image->filter(new FocusFilter(500, 500, '75-50')));
 $image->encode('png');
 $image->save('test.png');
 ```
+
+---
+Image attribution:  
+Title: Sunset city skyline  
+Author: [Kevin Young @ Unsplash](https://unsplash.com/photos/-icmOdYWXuQ)
+Source: https://unsplash.com/photos/-icmOdYWXuQ
