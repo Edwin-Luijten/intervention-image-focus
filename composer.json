@@ -2,6 +2,7 @@
   "name": "edwin-luijten/intervention-image-focus",
   "description": "Intervention Image filter to crop images with a focal point",
   "type": "library",
+  "license": "MIT",
   "keywords": [
     "intervention",
     "image",
