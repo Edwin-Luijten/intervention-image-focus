@@ -15,10 +15,9 @@ Cropping images based on a focal point.
 ```php
 use Intervention\Image\ImageManager;
 use EdwinLuijten\InterventionImageFocus\FocusFilter;
-...
 
 $manager = new ImageManager();
-$image = $manager->make($imageData);
+$image = $manager->make('foo.png');
 
 // Valid focal-point values are
 // crop-top-left
@@ -31,20 +30,8 @@ $image = $manager->make($imageData);
 // crop-bottom
 // crop-bottom-right
 // x-y percentage 
-$image->filter(new FocusFilter(500, 500, '50-50')));
+$image->filter(new FocusFilter(500, 500, '75-50')));
 
 $image->encode('png');
 $image->save('test.png');
 ```
-
-1284x602
-642x602
-428x602
-
-1284x301
-642x301
-428x301
-
-1284x200
-642x200
-428x200
