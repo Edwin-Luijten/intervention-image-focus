@@ -66,6 +66,9 @@ class FocusFilter implements FilterInterface
         return $image->crop($this->width, $this->height, $xShift, $yShift);
     }
 
+    /**
+     * @return int[]
+     */
     private function getCrop(): array
     {
         $cropMethods = [
@@ -98,7 +101,7 @@ class FocusFilter implements FilterInterface
         return [50, 50];
     }
 
-    private function getShift(float $ratio, float $containerSize, float $imageSize, $focusPosition, bool $toMinus = false): float
+    private function getShift(float $ratio, float $containerSize, float $imageSize, float $focusPosition, bool $toMinus = false): int
     {
         $containerCenter = floor($containerSize / 2);
         $focusFactor = $focusPosition / $imageSize;
@@ -122,6 +125,6 @@ class FocusFilter implements FilterInterface
             $focusOffset = 0;
         }
 
-        return $focusOffset;
+        return (int)$focusOffset;
     }
 }

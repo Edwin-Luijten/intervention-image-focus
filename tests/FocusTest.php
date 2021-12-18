@@ -8,6 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 final class FocusTest extends TestCase
 {
+    /**
+     * @var array|string[]
+     */
     private array $dimensions = [
         '1284x602',
         '642x602',
@@ -48,7 +51,7 @@ final class FocusTest extends TestCase
         }
     }
 
-    public function testCorrectDimensions()
+    public function testCorrectDimensions(): void
     {
         foreach ($this->dimensions as $dimension) {
             $image = $this->manager->make(__DIR__ . '/images/' . $dimension . '.jpg');
@@ -62,14 +65,14 @@ final class FocusTest extends TestCase
         }
     }
 
-    public function testValidateImagesAgainstSource()
+    public function testValidateImagesAgainstSource(): void
     {
         foreach ($this->dimensions as $dimension) {
             $this->assertEquals(0, $this->diff($dimension));
         }
     }
 
-    public function testValidateImageAgainstSourceOff()
+    public function testValidateImageAgainstSourceOff(): void
     {
         $this->assertNotEquals(0, $this->diff('off-428x602'));
     }
@@ -81,13 +84,17 @@ final class FocusTest extends TestCase
         $bTolerance = 0;
 
         $a = imagecreatefromjpeg(__DIR__ . '/images/source/' . $dimension . '.jpg');
+        $this->assertTrue(is_resource($a));
+
         $b = imagecreatefromjpeg(__DIR__ . '/images/' . str_replace('off-', '', $dimension) . '.jpg');
+        $this->assertTrue(is_resource($b));
 
         $out = 0;
+        // @phpstan-ignore-next-line
         for ($width = 0; $width <= imagesx($a) - 1; $width++) {
-            for ($height = 0; $height <= imagesy($a) - 1; $height++) {
-                $rgbA = imagecolorat($a, $width, $height);
-                $rgbB = imagecolorat($b, $width, $height);
+            for ($height = 0; $height <= imagesy($a) - 1; $height++) { // @phpstan-ignore-line
+                $rgbA = imagecolorat($a, $width, $height); // @phpstan-ignore-line
+                $rgbB = imagecolorat($b, $width, $height); // @phpstan-ignore-line
 
                 $rA = ($rgbA >> 16) & 0xFF;
                 $gA = ($rgbA >> 8) & 0xFF;
