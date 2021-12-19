@@ -21,17 +21,6 @@ use EdwinLuijten\InterventionImageFocus\FocusFilter;
 $manager = new ImageManager();
 $image = $manager->make('foo.png');
 
-// Valid focal-point values are
-// crop-top-left
-// crop-top
-// crop-top-right
-// crop-left
-// crop-center
-// crop-right
-// crop-bottom-left
-// crop-bottom
-// crop-bottom-right
-// x-y percentage 
 $image->filter(new FocusFilter(500, 500, '75-50')));
 
 $image->encode('png');

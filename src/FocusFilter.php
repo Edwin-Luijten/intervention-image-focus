@@ -31,7 +31,7 @@ class FocusFilter implements FilterInterface
         return $image;
     }
 
-    public function runResize(Image $image): Image
+    private function runResize(Image $image): Image
     {
         $imageWidth = $image->width();
         $imageHeight = $image->height();
@@ -70,24 +70,8 @@ class FocusFilter implements FilterInterface
      */
     private function getCrop(): array
     {
-        $cropMethods = [
-            'crop-top-left' => [0, 0],
-            'crop-top' => [50, 0],
-            'crop-top-right' => [100, 0],
-            'crop-left' => [0, 50],
-            'crop-center' => [50, 50],
-            'crop-right' => [100, 50],
-            'crop-bottom-left' => [0, 100],
-            'crop-bottom' => [50, 100],
-            'crop-bottom-right' => [100, 100],
-        ];
-
-        if (array_key_exists($this->fit, $cropMethods)) {
-            return $cropMethods[$this->fit];
-        }
-
         if (preg_match('/^([\d]{1,3})-([\d]{1,3})(?:-([\d]{1,3}(?:\.\d+)?))*$/', $this->fit, $matches)) {
-            if ($matches[1] > 100 or $matches[2] > 100 or $matches[3] > 100) {
+            if ($matches[1] > 100 || $matches[2] > 100) {
                 return [50, 50];
             }
 
@@ -100,7 +84,7 @@ class FocusFilter implements FilterInterface
         return [50, 50];
     }
 
-    private function getShift(float $ratio, float $containerSize, float $imageSize, float $focusPosition, bool $toMinus = false): int
+    private function getShift(float $ratio, float $containerSize, float $imageSize, float $focusPosition, bool $toMinus = false)
     {
         $containerCenter = floor($containerSize / 2);
         $focusFactor = $focusPosition / $imageSize;
@@ -124,6 +108,6 @@ class FocusFilter implements FilterInterface
             $focusOffset = 0;
         }
 
-        return (int)$focusOffset;
+        return $focusOffset;
     }
 }

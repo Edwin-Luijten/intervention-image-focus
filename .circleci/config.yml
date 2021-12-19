@@ -22,3 +22,11 @@ jobs:
       - run:
           name: Run Tests
           command: composer test
+          environment:
+            XDEBUG_MODE: coverage
+
+      - store_test_results:
+          path: tests/coverage
+
+      - store_artifacts:
+          path: tests/coverage

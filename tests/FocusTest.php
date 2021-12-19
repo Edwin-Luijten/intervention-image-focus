@@ -25,6 +25,8 @@ final class FocusTest extends TestCase
         '428x200',
     ];
 
+    private string $defaultCrop = '75-50';
+
     private ImageManager $manager;
 
     protected function setUp(): void
@@ -35,7 +37,7 @@ final class FocusTest extends TestCase
             $image = $this->manager->make(__DIR__ . '/images/source/base.jpg');
 
             [$width, $height] = explode('x', $dimension);
-            $image->filter(new FocusFilter((int)$width, (int)$height, '75-50'));
+            $image->filter(new FocusFilter((int)$width, (int)$height, $this->defaultCrop));
 
             $image->encode('jpg');
             $image->save(__DIR__ . '/images/' . $dimension . '.jpg');
@@ -68,25 +70,59 @@ final class FocusTest extends TestCase
     public function testValidateImagesAgainstSource(): void
     {
         foreach ($this->dimensions as $dimension) {
-            $this->assertEquals(0, $this->diff($dimension));
+            $this->assertEquals(0, $this->diff($dimension, $dimension));
         }
     }
 
     public function testValidateImageAgainstSourceOff(): void
     {
-        $this->assertNotEquals(0, $this->diff('off-428x602'));
+        $this->assertNotEquals(0, $this->diff('off-428x602', '428x602'));
     }
 
-    private function diff(string $dimension): int
+    public function testValidateFocusOutOffBounds(): void
+    {
+        $image = $this->manager->make(__DIR__ . '/images/source/base.jpg');
+
+        [$width, $height] = explode('x', '428x602');
+        $image->filter(new FocusFilter((int)$width, (int)$height, '101-50'));
+
+        $image->encode('jpg');
+        $image->save(__DIR__ . '/images/428x602-101-50.jpg');
+
+        $image->destroy();
+
+        $this->assertEquals(0, $this->diff( '428x602-50-50', '428x602-101-50'));
+
+        unlink(__DIR__ . '/images/428x602-101-50.jpg');
+    }
+
+    public function testValidateInvalidFocus(): void
+    {
+        $image = $this->manager->make(__DIR__ . '/images/source/base.jpg');
+
+        [$width, $height] = explode('x', '428x602');
+        $image->filter(new FocusFilter((int)$width, (int)$height, 'foo'));
+
+        $image->encode('jpg');
+        $image->save(__DIR__ . '/images/428x602-foo.jpg');
+
+        $image->destroy();
+
+        $this->assertEquals(0, $this->diff( '428x602-50-50', '428x602-foo'));
+
+        unlink(__DIR__ . '/images/428x602-foo.jpg');
+    }
+
+    private function diff(string $a, string $b): int
     {
         $rTolerance = 0;
         $gTolerance = 0;
         $bTolerance = 0;
 
-        $a = imagecreatefromjpeg(__DIR__ . '/images/source/' . $dimension . '.jpg');
+        $a = imagecreatefromjpeg(__DIR__ . '/images/source/' . $a . '.jpg');
         $this->assertTrue(is_resource($a));
 
-        $b = imagecreatefromjpeg(__DIR__ . '/images/' . str_replace('off-', '', $dimension) . '.jpg');
+        $b = imagecreatefromjpeg(__DIR__ . '/images/' . str_replace('off-', '', $b) . '.jpg');
         $this->assertTrue(is_resource($b));
 
         $out = 0;

@@ -31,7 +31,7 @@
   },
   "scripts": {
     "test": [
-      "./vendor/bin/phpunit tests"
+      "./vendor/bin/phpunit tests --coverage-clover=tests/coverage/clover.xml"
     ],
     "quality": [
       "./vendor/bin/phpstan analyze src tests --level=9"
