@@ -3,9 +3,10 @@
 ![Packagist Downloads](https://img.shields.io/packagist/dt/edwin-luijten/intervention-image-focus?style=flat-square)
 ![CircleCI](https://img.shields.io/circleci/build/github/Edwin-Luijten/intervention-image-focus/main?style=flat-square)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/Edwin-Luijten/intervention-image-focus?style=flat-square)
-![Example](example.png)
-Cropping images based on a focal point.
 
+![Example](example.png)
+
+Cropping images based on a focal point.
 
 ## Requirements
 - PHP ^7.4 or ^8.1
@@ -22,6 +23,7 @@ use EdwinLuijten\InterventionImageFocus\FocusFilter;
 $manager = new ImageManager();
 $image = $manager->make('foo.png');
 
+// x-y percentage
 $image->filter(new FocusFilter(500, 500, '75-50')));
 
 $image->encode('png');
